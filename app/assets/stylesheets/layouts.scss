@@ -1,0 +1,33 @@
+/* variables */
+
+$primary: #4A90E2;
+
+
+/* mixins */
+
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-moz-border-radius: $radius;
+}
+
+
+/* _header */
+
+.header {
+	color: white;
+	background: $primary;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 36px;
+	font-weight: 200;
+	padding: 20px 0;
+	letter-spacing: 4px;
+}
+
+.fa-flag.fa-logo {
+	@include border-radius(50%);
+	border: 2px solid white;
+	padding: 5px;
+}
