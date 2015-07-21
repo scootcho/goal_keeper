@@ -54,4 +54,30 @@ $primary: #4A90E2;
 	}
 }
 
+.col-xs-10.col-sm-6.center-block {
+	float: none;
+	.frame {
+		@include border-radius(5px);
+		background: white;
+		padding: 0px 0px 5px 0px;
+		text-align: center;
+		.thumbnail{
+			margin: 0px;
+			padding: 20px;
+		}
+		.row  h3 {
+			margin: 3px 0px;
+			white-space: nowrap;
+			color: $primary;
+		}
+		#due, #budget{
+			display: inline;
+			color: gray;
+			width: 50%;
+			font-size: 12px;
+			padding: 10%;
+		}
+	}
+}
+
 
