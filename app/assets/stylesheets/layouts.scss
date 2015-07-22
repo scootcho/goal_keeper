@@ -44,3 +44,26 @@ hr {
 	border: 2px solid white;
 	padding: 5px;
 }
+
+
+/* _nav */
+
+.nav {
+	width: 90%;
+	margin: 20px auto 0px;
+	display: block;
+	font-family: 'fontello';
+}
+
+.nav-btn {
+	@include border-radius(2px);
+	float: left;
+	font-size: 30px;
+	color: white;
+	background: #979797;
+	width: 23%;
+	padding: 5px 0;
+	margin: 1%;
+	display: inline-block;
+	text-align: center;
+}
