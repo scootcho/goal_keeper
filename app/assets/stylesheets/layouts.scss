@@ -1,28 +1,12 @@
-/* variables */
-
-$primary: #4A90E2;
-
-
-/* mixins */
-
-@mixin border-radius($radius) {
-	border-radius: $radius;
-	-webkit-border-radius: $radius;
-	-ms-border-radius: $radius;
-	-moz-border-radius: $radius;
-}
-
-
 /* application */
 
 body{
-	background: #4A4A4A;
+	background: $darkgray;
 }
 
 hr {
 	width: 80%;
-	margin-top: 0px;
-	margin-bottom: 0px;
+	margin: 0px auto;
 }
 
 
@@ -35,7 +19,7 @@ hr {
 	text-transform: uppercase;
 	font-size: 36px;
 	font-weight: 200;
-	padding: 20px 0;
+	padding: 20px 0px;
 	letter-spacing: 4px;
 }
 
@@ -50,7 +34,7 @@ hr {
 
 .nav {
 	width: 90%;
-	margin: 20px auto 0px;
+	margin: 20px auto 0px auto;
 	display: block;
 	font-family: 'fontello';
 }
