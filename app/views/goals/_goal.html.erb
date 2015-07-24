@@ -1,0 +1,15 @@
+<div class="goal">
+  <div class="title">
+    <%= goal.title %>
+  </div>
+  <div class="amount">
+    <%= number_to_currency(goal.amount, precision: 0) %>
+  </div>
+  <div class="due-date">
+    <%= goal.due_date.strftime("%a, %b %m, %Y") %>
+  </div>
+
+  <%= link_to "edit goal", edit_goal_path(goal), class: "btn btn-default btn-xs" %>
+
+  <%= link_to "delete goal", goal_path(goal), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "STAHHP!! YOU NEED GOALS IN LIFE!"} %>
+</div>

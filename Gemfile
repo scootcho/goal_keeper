@@ -28,6 +28,9 @@ gem 'bootstrap-sass', '~> 3.3.5'
 
 #vector icons: https://github.com/bokmann/font-awesome-rails
 gem "font-awesome-rails" 
+
+# Forms made easy for Rails! https://github.com/plataformatec/simple_form
+gem 'simple_form'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -39,10 +42,10 @@ gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  #gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

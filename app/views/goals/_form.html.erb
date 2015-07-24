@@ -1,0 +1,6 @@
+<%= simple_form_for @goal do |f| %>
+  <%= f.input :title, placeholder: "Vacation to ...!" %>
+  <%= f.input :amount, placeholder: "$2,000" %>
+  <%= f.input :due_date %>
+  <%= f.submit "Start My Goal!" %>
+<% end %>

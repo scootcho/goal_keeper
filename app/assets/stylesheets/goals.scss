@@ -1,0 +1,60 @@
+/* _goal */
+
+.goal {
+	border-bottom: 1px solid	white;
+	.title {
+		margin: 20px;
+		font-size: 24px;
+		color: white;
+	}
+	.amount {
+		color: $primary;
+		width: 40%;
+		margin: 20px;
+		display: inline;
+	}
+	.due-date {
+		color: white;
+		width: 40%;
+		margin: 20px;
+		display: inline;
+	}
+}
+
+
+/* _form */
+
+#form-title {
+	text-align: center;
+	color: white;
+	font-size: 24px;
+	margin-top: 20px;
+}
+
+.simple_form.new_goal, .edit_goal {
+	text-align: center;
+	margin: 20px auto;
+}
+
+.simple_form label {
+	display: block;
+	color: white;
+	margin: 5px 0;
+	font-weight: 100;
+	letter-spacing: 0.2em;
+}
+
+.simple_form input {
+	@include border-radius(2px);
+  margin-bottom: 10px;
+  border: none;
+  padding: 10px 5px;
+  width: 80%;
+}
+
+.simple_form select {
+	@include border-radius(2px);
+  margin-bottom: 10px;
+  border: none;
+  padding: 10px 5px;
+}
