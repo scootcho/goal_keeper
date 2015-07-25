@@ -1,4 +1,4 @@
-<div class="goal">
+<div class="goal" id="goal-<%= goal.id %>">
   <div class="title">
     <%= goal.title %>
   </div>
@@ -11,5 +11,9 @@
 
   <%= link_to "edit goal", edit_goal_path(goal), class: "btn btn-default btn-xs" %>
 
-  <%= link_to "delete goal", goal_path(goal), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "STAHHP!! YOU NEED GOALS IN LIFE!"} %>
+  <%= link_to "delete goal", goal, method: :delete, remote: true, class: "btn btn-danger btn-xs", data: { confirm: "STAHHP!! YOU NEED GOALS IN LIFE!"} %>
+
+  <% if goal.filepicker_url %>
+    <%= filepicker_image_tag goal.filepicker_url, w: 160, h: 160, fit: 'clip' %>
+  <% end %>
 </div>

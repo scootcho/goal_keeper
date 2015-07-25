@@ -1,0 +1,5 @@
+<% if @status == "SUCCESS" %>
+	$("#goal-<%= @goal.id %>").remove();
+<% elsif @status == "FAIL" %>
+	alert("YOU FUCKIN FAILLLLL!!!");
+<% end %>

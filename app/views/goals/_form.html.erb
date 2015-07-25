@@ -2,5 +2,7 @@
   <%= f.input :title, placeholder: "Vacation to ...!" %>
   <%= f.input :amount, placeholder: "$2,000" %>
   <%= f.input :due_date %>
+  <%= f.label :filepicker_url, "Upload a photo of your goal!" %>
+  <%= f.filepicker_field :filepicker_url %>
   <%= f.submit "Start My Goal!" %>
 <% end %>

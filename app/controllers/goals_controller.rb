@@ -34,16 +34,18 @@ class GoalsController < ApplicationController
 	end
 
 	def destroy
+		@status = "FAIL"
 		@goal = Goal.find(params[:id])
 		if @goal.destroy
-			redirect_to goals_path
+			@status = "SUCCESS"
+			respond_to :js
 		else
-			render :show
+			redirecto_to :show
 		end
 	end
 
 	private
 		def goal_param
-			params.require(:goal).permit(:title, :amount, :due_date)
+			params.require(:goal).permit(:title, :amount, :due_date, :filepicker_url)
 		end
 end
