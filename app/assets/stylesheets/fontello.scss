@@ -33,6 +33,9 @@
   @include font-smoothing(antialiased);
 }
  
-.icon-user:before { content: '\e800'; } /* '' */
-.icon-params:before { content: '\e801'; } /* '' */
-.icon-sliders:before { content: '\e802'; } /* '' */
+
+.icon-sliders:before { content: '\e800'; } /* '' */
+.icon-user:before { content: '\e801'; } /* '' */
+.icon-trash:before { content: '\e802'; } /* '' */
+.icon-flag:before { content: '\e803'; } /* '' */
+.icon-chart-bar:before { content: '\e804'; } /* '' */

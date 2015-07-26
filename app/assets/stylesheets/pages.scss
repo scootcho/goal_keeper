@@ -2,7 +2,7 @@
 
 .budget {
 	text-align: center;
-	color: white;
+	color: $gray;
 	.title {
 		padding: 20px 0 10px 0;
 	}
@@ -24,6 +24,7 @@
 		white-space: nowrap;
 		.circle {
 			@include border-radius(50%);
+			border: 1px solid $gray;
 			display: inline-block;
 			background: white;
 			width: 30px;
@@ -38,30 +39,50 @@
 	}
 }
 
-.col-xs-10.col-sm-6.center-block {
-	float: none;
-	.frame {
-		@include border-radius(5px);
-		background: white;
-		padding-bottom: 5px;
-		text-align: center;
-		.thumbnail{
-			margin: 0px;
-			padding: 20px;
-		}
-		.row  h3 {
-			margin: 3px 0px 0px 50px;
-			white-space: nowrap;
-			color: $primary;
-		}
-		#due, #budget{
-			display: inline;
-			color: gray;
-			width: 50%;
-			font-size: 12px;
-			padding: 10%;
-		}
+.current-goal {
+	color: white;
+}
+
+.frame {
+	text-align: center;
+	position: relative;
+	img{
+		width: 100%;
+		height: auto;
+		margin: 0px;
 	}
 }
 
+#current-title {
+	font-size: 2em;
+}
+
+.shader {
+  position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  color: white;
+}
+
+#goal-target {
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 0;
+}
+
+#due, #budget {
+	display: inline;
+	color: white;
+	font-size: 1em;
+	padding: 10%;
+	margin-bottom: 0;
+}
+
+.clear-nav {
+	margin-bottom: 65px;
+}
 

@@ -1,8 +1,9 @@
 /* application */
 
 body{
-	background: $darkgray;
-	padding-bottom: 100px;
+	max-width: 100%;
+	margin-top: 0;
+	text-align: center;
 }
 
 hr {
@@ -14,19 +15,19 @@ hr {
 /* _header */
 
 .header {
-	color: white;
-	background: $primary;
+	color: $primary;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 36px;
 	font-weight: 200;
-	padding: 20px 0px;
+	padding: 10px 0px;
 	letter-spacing: 4px;
+	border-bottom: 1px solid $gray;
 }
 
-.fa-flag.fa-logo {
+#circle {
 	@include border-radius(50%);
-	border: 2px solid white;
+	border: 1px solid $primary;
 	padding: 5px;
 }
 
@@ -34,7 +35,7 @@ hr {
 /* _nav */
 
 .nav {
-	width: 90%;
+	width: 100%;
 	display: block;
 	font-family: 'fontello';
 	position: fixed;
@@ -43,22 +44,20 @@ hr {
   left: 0;
   margin-right: auto;
   margin-left: auto;
-	background: $darkgray;
+	background: $primary;
 }
 
 .nav-btn {
-	@include border-radius(2px);
 	float: left;
 	font-size: 30px;
 	color: white;
-	background: #979797;
 	width: 23%;
 	padding: 5px 0;
 	margin: 1%;
 	display: inline-block;
 	text-align: center;
 	:hover {
-		color: $primary;
+		color: $dark-gray;
 	}
 	a {
 		color: white;

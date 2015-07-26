@@ -5,6 +5,7 @@
   <div class="amount-left">
     <span>$102</span>/144
   </div>
+  <hr/>
   <div class="weekly-goal">
     <span class="glyphicon glyphicon-chevron-left"></span>
     <div id="this-week">This week</div>
@@ -19,26 +20,19 @@
         <div class="circle"><span>S</span></div>
     </div>
   </div>
-  <hr/>
-  <div class="next-goal">
-    <div class="title">
-      Next goal
-    </div>
-    <div class="row">
-      <div class="col-xs-10 col-sm-6 center-block">
-        <div class="frame">
-          <div class="thumbnail">
-            <%= image_tag("sd.jpg") %>
-          </div>
-          <div class="row">
-            <h3>Vacation to San Diego!</h3>
-          </div>
-          <div class="row">
-            <div id="due">Due: <span>08/30/15</span></div>
-            <div id="budget">Budget: <span>$1,000</span></div>
-          </div>
+  <div class="current-goal">
+    <div class="frame">
+      <div class="shader">current goal</br>
+        <div id="current-title">
+          Vacation to San Diego!
         </div>
       </div>
+      <div class="shader" id="goal-target">
+        <div id="due">Due: <span>08/30/15</span></div>
+        <div id="budget">Budget: <span>$1,000</span></div>
+      </div>
+      <%= image_tag("sd.jpg") %>
     </div>
   </div>
+  <div class="clear-nav">
 </div>

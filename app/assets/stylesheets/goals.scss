@@ -2,10 +2,15 @@
 
 .goal {
 	border-bottom: 1px solid	white;
+	padding-bottom: 10px;
 	.title {
-		margin: 20px;
+		margin: 10px;
 		font-size: 24px;
 		color: white;
+	}
+	.goal-img {
+		display: block;
+		margin: 20px;
 	}
 	.amount {
 		color: $primary;

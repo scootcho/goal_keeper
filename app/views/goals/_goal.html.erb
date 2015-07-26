@@ -2,6 +2,11 @@
   <div class="title">
     <%= goal.title %>
   </div>
+  <div class="goal-img">
+    <% if goal.filepicker_url %>
+      <%= filepicker_image_tag goal.filepicker_url, w: 160, h: 160, fit: 'clip' %>
+    <% end %>
+  </div>
   <div class="amount">
     <%= number_to_currency(goal.amount, precision: 0) %>
   </div>
@@ -9,11 +14,11 @@
     <%= goal.due_date.strftime("%a, %b %m, %Y") %>
   </div>
 
-  <%= link_to "edit goal", edit_goal_path(goal), class: "btn btn-default btn-xs" %>
+  <%= link_to edit_goal_path(goal), class: "btn btn-default btn-xs" do %>
+    <i class="icon-sliders"></i>
+  <% end %>
 
-  <%= link_to "delete goal", goal, method: :delete, remote: true, class: "btn btn-danger btn-xs", data: { confirm: "STAHHP!! YOU NEED GOALS IN LIFE!"} %>
-
-  <% if goal.filepicker_url %>
-    <%= filepicker_image_tag goal.filepicker_url, w: 160, h: 160, fit: 'clip' %>
+  <%= link_to goal, method: :delete, remote: true, class: "btn btn-danger btn-xs", data: { confirm: "STAHHP!! YOU NEED GOALS IN LIFE!"} do %>
+    <i class="icon-trash"></i>
   <% end %>
 </div>

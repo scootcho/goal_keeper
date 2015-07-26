@@ -1,5 +1,5 @@
 <%= simple_form_for @goal do |f| %>
-  <%= f.input :title, placeholder: "Vacation to ...!" %>
+  <%= f.input :title, placeholder: "Vacation to ...!", autofocus: true %>
   <%= f.input :amount, placeholder: "$2,000" %>
   <%= f.input :due_date %>
   <%= f.label :filepicker_url, "Upload a photo of your goal!" %>
