@@ -1,5 +1,6 @@
-<div id="form-title">
-  YOUR GOALS!!
+<div id="page-title">
+  Current Goal!
 </div>
-<%= link_to "start a new goal", new_goal_path, class: "btn btn-primary" %>
 <%= render @goals %>
+<%= link_to "start a new goal", new_goal_path, class: "flat-btn", id: "stick-to-bottom" %>
+<div class="clear-nav"></div>
