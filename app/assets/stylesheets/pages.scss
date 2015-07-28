@@ -1,3 +1,49 @@
+/* splash page */
+
+#splash {
+	background: linear-gradient(-180deg, #61CBBC 0%, #98C73D 100%);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 2147483647;
+	text-align: center;
+	vertical-align: middle;
+	color: white;
+}
+
+#splash-content {
+	display: block;
+	margin-top: 12em;
+}
+
+.ton-li-flag-1.lg {
+	font-size: 6em;
+	vertical-align: middle;
+}
+
+#circle-lg {
+	@include border-radius(50%);
+	border: 3px solid white;
+	padding: 0.5em;
+}
+
+#splash-title {
+	display: block;
+	margin-top: 3em;
+	font-size: 2em;
+	letter-spacing: 0.2em;
+}
+
+#splash-sub {
+	display: block;
+	font-size: 1.2em;
+	font-weight: 100;
+	letter-spacing: 0.125em;
+}
+
+
 /* pages */
 
 .budget {

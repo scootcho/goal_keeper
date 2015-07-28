@@ -13,8 +13,14 @@
         <span><%= number_to_currency(goal.amount, precision: 0) %></span>
       </div>
     </div>
-    <% if goal.filepicker_url %>
-      <%= filepicker_image_tag goal.filepicker_url %>
+    <% if goal.filepicker_url.blank? %>
+      <%= link_to goal_path(goal) do %>
+        <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
+      <% end %>
+    <% else %>
+      <%= link_to goal_path(goal) do %>
+        <%= filepicker_image_tag goal.filepicker_url %>
+      <% end %>
     <% end %>
   </div>
 </div>

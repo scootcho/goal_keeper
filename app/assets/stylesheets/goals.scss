@@ -33,7 +33,7 @@
 
 .simple_form label {
 	display: block;
-	color: white;
+	color: $gray;
 	margin: 5px 0;
 	font-weight: 100;
 	letter-spacing: 0.2em;
@@ -41,19 +41,31 @@
 
 .simple_form input {
 	@include border-radius(2px);
+	border: 1px solid $primary;
   margin-bottom: 10px;
-  border: none;
   padding: 10px 5px;
   width: 80%;
 }
 
 .simple_form select {
-	@include border-radius(2px);
   margin-bottom: 10px;
-  border: none;
+  height: 3em;
+	background: none;
+	border: 1px solid $primary;
   padding: 10px 5px;
+  width: 25%;
 }
 
 button.fp__btn {
+	@include border-radius(0);
 	margin: 10px auto;
+	width: 80%;
 }
+
+
+/* _list */
+
+.place-holder {
+	background-image: image-url("placeholder.png");
+	width: 100%;
+	}

@@ -1,2 +1,16 @@
-<%= render partial: "goal", locals: {goal: @goal} %>
+<div id="page-title">
+  <%= @goal.title %>
+</div>
+  <div class="frame">
+  <% if @goal.filepicker_url.blank? %>
+    <%= link_to goal_path(@goal) do %>
+      <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
+    <% end %>
+  <% else %>
+    <%= link_to goal_path(@goal) do %>
+      <%= filepicker_image_tag @goal.filepicker_url %>
+    <% end %>
+  <% end %>
+</div>
+<%= render partial: "form", locals: {goal: @goal} %>
 <div class="clear-nav"></div>
