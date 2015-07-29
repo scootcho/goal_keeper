@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	#validations
-	valdates :name, presence: true
+	validates :name, presence: true
 
 	#relations
 	belongs_to :expense

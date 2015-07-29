@@ -1,7 +1,10 @@
 <%= simple_form_for @expense do |f| %>
-  <%= f.input :description, placeholder: "Tocobell", required: false , autofocus: true %>
+  <%= f.input :description, placeholder: "Tacobell", required: false , autofocus: true %>
   <%= f.input :amount, placeholder: "$7.23", required: false %>
   <%= f.input :transaction_date, required: false %>
 
+  <%= simple_fields_for @category do |f| %>
+    <%= f.input :name, placeholder: "food", required: false %>
+  <% end %>
   <%= f.submit "create new expense" %>
 <% end %>

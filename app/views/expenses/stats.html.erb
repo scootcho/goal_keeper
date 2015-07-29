@@ -5,7 +5,12 @@
   <%= image_tag('piechart.png') %>
 </div>
 
-
+<% @expenses.each do |expense| %>
+  <p><%= expense.transaction_date %></p>
+  <%= expense.description %>
+  <%= expense.category.name %>
+  <%= expense.amount %>
+<% end %>
 
 <%= link_to "create new transaction", new_expense_path, class: "flat-btn" %>
 
