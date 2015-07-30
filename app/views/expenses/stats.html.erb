@@ -5,13 +5,48 @@
   <%= image_tag('piechart.png') %>
 </div>
 
-<% @expenses.each do |expense| %>
-  <p><%= expense.transaction_date %></p>
-  <%= expense.description %>
-  <%= expense.category.name %>
-  <%= expense.amount %>
+<%= link_to auto_transportation_path, class: "category-line" do %>
+  <span>Auto & Transportation</span>
+  <span id="auto-category">
+    <%= transaction_count("Auto & Transportation") %>
+  </span>
 <% end %>
 
-<%= link_to "create new transaction", new_expense_path, class: "flat-btn" %>
+<%= link_to food_and_dining_path, class: "category-line" do %>
+  <span>Food & Dining</span>
+  <span id="food-category">
+    <%= transaction_count("Food & Dining") %>
+  </span>
+<% end %>
+
+<%= link_to entertainments_path, class: "category-line" do %>
+  <span>Entertainment</span>
+  <span id="entertainment-category">
+    <%= transaction_count("Entertaiment") %>
+  </span>
+<% end %>
+
+<%= link_to bills_and_utilities_path, class: "category-line" do %>
+  <span>Bills & Utilities</span>
+  <span id="bill-category">
+    <%= transaction_count("Bills & Utilities") %>
+  </span>
+<% end %>
+
+<%= link_to investments_path, class: "category-line" do %>
+  <span>Investments</span>
+  <span id="investment-category">
+    <%= transaction_count("Bills & Utilities") %>
+  </span>
+<% end %>
+
+<%= link_to miscellaneous_path, class: "category-line" do %>
+  <span>MISC</span>
+  <span id="misc-category">
+    <%= transaction_count("Bills & Utilities") %>
+  </span>
+<% end %>
 
 <%= link_to "see all transactions", expenses_path, class: "flat-btn", id: "stick-to-bottom" %>
+
+<div class="clear-nav"></div>

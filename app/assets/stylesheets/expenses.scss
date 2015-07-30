@@ -1,3 +1,57 @@
-// Place all the styles related to the Expenses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#piechart {
+	padding-bottom: 1em;
+	border-bottom: 1px solid $gray;
+}
+
+.expense-line {
+	display: block;
+	padding: 0.2em;
+	border-top: 1px solid $gray;
+	&:hover {
+		background: $primary;
+	}
+}
+
+.category-line {
+	display: block;
+	border-bottom: 1px solid $gray;
+	span {
+		text-align: right;
+		font-size: 1.5em;
+		padding-right: 1em;
+	}
+	#auto-category {
+		color: $blue;
+	}
+	#food-category {
+		color: $turquoise;
+	}
+	#entertainment-category {
+		color: $dark-gray;
+	}
+	#bill-category {
+		color: $green;
+	}
+	#investment-category {
+		color: $primary;
+	}
+	#misc-category {
+		color: $yellow;
+	}
+}
+
+
+textarea {
+	width: 80%;
+	resize: none;
+}
+
+select.select {
+	width: 80%;
+}
+
+/* show */
+
+.expense-title {
+	border: none;
+}

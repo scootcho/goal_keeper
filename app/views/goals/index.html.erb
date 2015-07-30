@@ -3,32 +3,32 @@
 </div>
 
 <% @goals.each do |goal| %>
-<div class="current-goal" id="goal-<%= goal.id %>">
-  <div class="frame">
-    <div class="shader">
-      <div id="current-title">
-        <%= goal.title %>
+  <%= link_to goal_path(goal), class: "curent-goal" do %>
+  <div class="current-goal" id="goal-<%= goal.id %>">
+    <div class="frame">
+      <div class="shader">
+        <div id="current-title">
+          <%= goal.title %>
+        </div>
       </div>
-    </div>
-    <div class="shader" id="goal-target">
-      <div id="due">Due:
-        <span><%= goal.due_date.strftime("%a, %b %m, %Y") %></span>
+      <div class="shader" id="goal-target">
+        <div id="due">Due:
+          <span><%= goal.due_date.strftime("%a, %b %m, %Y") %></span>
+        </div>
+        <div id="budget">Budget:
+          <span><%= number_to_currency(goal.amount, precision: 0) %></span>
+        </div>
       </div>
-      <div id="budget">Budget:
-        <span><%= number_to_currency(goal.amount, precision: 0) %></span>
-      </div>
-    </div>
-    <% if goal.filepicker_url.blank? %>
-      <%= link_to goal_path(goal) do %>
+      <% if goal.filepicker_url.blank? %>
         <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
+      <% else %>
+        <%= link_to goal_path(goal) do %>
+          <%= filepicker_image_tag goal.filepicker_url %>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= link_to goal_path(goal) do %>
-        <%= filepicker_image_tag goal.filepicker_url %>
-      <% end %>
-    <% end %>
+    </div>
   </div>
-</div>
+  <% end %>
 <% end %>
 
 <%= link_to "start a new goal", new_goal_path, class: "flat-btn", id: "stick-to-bottom" %>

@@ -1,0 +1,8 @@
+<div id="page-title">
+  All Transactions
+</div>
+
+<%= render partial: 'expenses', locals: { expenses: @expenses } %>
+
+<%= link_to "create new transaction", new_expense_path, class: "flat-btn" %>
+<div class="clear-nav"></div>

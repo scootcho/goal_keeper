@@ -1,3 +1,8 @@
+<div id="page-title">
+  Edit Expense
+</div>
+
+<div class="expense-title">
 <%= simple_form_for @expense do |f| %>
   <%= f.input :description, placeholder: "Tocobell", required: false , autofocus: true %>
   <%= f.input :transaction_date, required: false %>
@@ -12,4 +17,5 @@
                         required: false %>
   <%= f.submit "create new expense" %>
 <% end %>
+
 <div class="clear-nav"></div>
