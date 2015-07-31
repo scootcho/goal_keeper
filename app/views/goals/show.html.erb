@@ -1,16 +1,33 @@
 <div id="page-title">
-  <%= @goal.title %>
+  Goal
 </div>
-  <div class="frame">
-  <% if @goal.filepicker_url.blank? %>
-    <%= link_to goal_path(@goal) do %>
-      <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
-    <% end %>
-  <% else %>
-    <%= link_to goal_path(@goal) do %>
-      <%= filepicker_image_tag @goal.filepicker_url %>
-    <% end %>
-  <% end %>
-</div>
-<%= render partial: "form", locals: {goal: @goal} %>
+
+<%= link_to goal_path(@goal), class: "curent-goal" do %>
+  <div class="current-goal" id="goal-<%= @goal.id %>">
+    <div class="frame">
+      <div class="shader">
+        <div id="current-title">
+          <%= @goal.title %>
+        </div>
+      </div>
+      <div class="shader" id="goal-target">
+        <div id="due">Due:
+          <span><%= @goal.due_date.strftime("%a, %b %m, %Y") %></span>
+        </div>
+        <div id="budget">Budget:
+          <span><%= number_to_currency(@goal.amount, precision: 0) %></span>
+        </div>
+      </div>
+      <% if @goal.filepicker_url.blank? %>
+        <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
+      <% else %>
+        <%= link_to goal_path(@goal) do %>
+          <%= filepicker_image_tag @goal.filepicker_url %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "edit goal", edit_goal_path(@goal), class: "flat-btn" %>
 <div class="clear-nav"></div>

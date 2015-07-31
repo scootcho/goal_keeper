@@ -1,2 +1,6 @@
-<div id="form-title">Let's make it better!</div>
-<%= render partial: "form" %>
+<div id="page-title">Edit your goal</div>
+<div class="frame">
+  <%= render partial: "image" %>
+</div>
+<%= render partial: "form", locals: {goal: @goal} %>
+<div class="clear-nav"></div>

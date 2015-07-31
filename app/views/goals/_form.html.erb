@@ -1,8 +1,8 @@
 <%= simple_form_for @goal do |f| %>
-  <%= f.input :title, placeholder: "Own a home!", label: "what's your goal?", required: false , autofocus: true %>
-  <%= f.input :amount, placeholder: "$200,000", required: false %>
-  <%= f.input :due_date, required: false %>
   <%= f.label :filepicker_url, "Upload a photo of your goal!" %>
   <%= f.filepicker_field :filepicker_url %>
-  <%= f.submit "Start My Goal!" %>
+  <%= f.input :title %>
+  <%= f.input :amount %>
+  <%= f.input :due_date %>
+  <%= f.button :submit %>
 <% end %>

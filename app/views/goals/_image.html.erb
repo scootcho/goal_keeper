@@ -1,0 +1,7 @@
+<% if @goal.filepicker_url.blank? %>
+  <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
+<% else %>
+  <%= link_to goal_path(@goal) do %>
+    <%= filepicker_image_tag @goal.filepicker_url %>
+  <% end %>
+<% end %>
