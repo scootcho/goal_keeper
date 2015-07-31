@@ -59,6 +59,9 @@ select.select {
 
 /* show */
 
-.expense-title {
-	border: none;
+.expense-title, .expense-amount, .expense-category {
+	font-size: 2em;
+	color: $gray;
+	padding-top: 0.2em;
+	padding-bottom: 1em;
 }

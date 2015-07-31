@@ -2,7 +2,6 @@
   Edit Expense
 </div>
 
-<div class="expense-title">
 <%= simple_form_for @expense do |f| %>
   <%= f.input :description, placeholder: "Tocobell", required: false , autofocus: true %>
   <%= f.input :transaction_date, required: false %>

@@ -2,9 +2,18 @@
   Expense Detail
 </div>
 
+Description:
 <div class="expense-title">
-<%= @expense.description %>
-<%= @expense %>
-<%= link_to "edit expense", edit_expense_path(@expense), class: "flat-btn" %>
+  <%= @expense.description %>
 </div>
+Amount:
+<div class="expense-amount">
+  <%= @expense.amount %>
+</div>
+Category:
+<div class="expense-category">
+  <%= @expense.category %>
+</div>
+<%= link_to "edit expense", edit_expense_path(@expense), class: "flat-btn" %>
+
 <div class="clear-nav"></div>
