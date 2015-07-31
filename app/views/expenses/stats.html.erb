@@ -1,48 +1,49 @@
 <div id="page-title">
   Statistics
 </div>
+
 <div id="piechart">
-  <%= image_tag('piechart.png') %>
+  <%= pie_chart Expense.group(:category).sum(:amount), library: { plotOptions: { pie: { dataLabels: { enabled: false } } } } %>
 </div>
 
-<%= link_to auto_transportation_path, class: "category-line" do %>
-  <span>Auto & Transportation</span>
-  <span id="auto-category">
+<%= link_to auto_transportation_path, class: "category-line col-xs-12 col-sm-12" do %>
+  <span class="col-xs-8 col-sm-8">Auto & Transportation</span>
+  <span class="col-xs-4 col-sm-4" id="auto-category">
     <%= transaction_count("Auto & Transportation") %>
   </span>
 <% end %>
 
-<%= link_to food_and_dining_path, class: "category-line" do %>
-  <span>Food & Dining</span>
-  <span id="food-category">
+<%= link_to food_and_dining_path, class: "category-line col-xs-12 col-sm-12" do %>
+  <span class="col-xs-8 col-sm-8">Food & Dining</span>
+  <span class="col-xs-4 col-sm-4" id="food-category">
     <%= transaction_count("Food & Dining") %>
   </span>
 <% end %>
 
-<%= link_to entertainments_path, class: "category-line" do %>
-  <span>Entertainment</span>
-  <span id="entertainment-category">
+<%= link_to entertainments_path, class: "category-line col-xs-12 col-sm-12" do %>
+  <span class="col-xs-8 col-sm-8">Entertainment</span>
+  <span class="col-xs-4 col-sm-4" id="entertainment-category">
     <%= transaction_count("Entertaiment") %>
   </span>
 <% end %>
 
-<%= link_to bills_and_utilities_path, class: "category-line" do %>
-  <span>Bills & Utilities</span>
-  <span id="bill-category">
+<%= link_to bills_and_utilities_path, class: "category-line col-xs-12 col-sm-12" do %>
+  <span class="col-xs-8 col-sm-8">Bills & Utilities</span>
+  <span class="col-xs-4 col-sm-4" id="bill-category">
     <%= transaction_count("Bills & Utilities") %>
   </span>
 <% end %>
 
-<%= link_to investments_path, class: "category-line" do %>
-  <span>Investments</span>
-  <span id="investment-category">
+<%= link_to investments_path, class: "category-line col-xs-12 col-sm-12" do %>
+  <span class="col-xs-8 col-sm-8">Investments</span>
+  <span class="col-xs-4 col-sm-4" id="investment-category">
     <%= transaction_count("Bills & Utilities") %>
   </span>
 <% end %>
 
-<%= link_to miscellaneous_path, class: "category-line" do %>
-  <span>MISC</span>
-  <span id="misc-category">
+<%= link_to miscellaneous_path, class: "category-line col-xs-12 col-sm-12" do %>
+  <span class="col-xs-8 col-sm-8">MISC</span>
+  <span class="col-xs-4 col-sm-4" id="misc-category">
     <%= transaction_count("Bills & Utilities") %>
   </span>
 <% end %>

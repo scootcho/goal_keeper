@@ -33,6 +33,9 @@ gem 'simple_form'
 # Adds form, image_tag, etc with filepicker.io in Rails. https://github.com/Ink/filepicker-rails
 gem 'filepicker-rails'
 
+# Javascript charts with one line of Ruby http://chartkick.com
+gem "chartkick"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
