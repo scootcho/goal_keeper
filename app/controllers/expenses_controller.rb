@@ -23,7 +23,11 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
   end
 
-  def edit #TODO: Fix params error
+  def edit
+    @expense = Expense.find(params[:id])
+  end
+
+  def update #TODO: Fix params error
     @expense = Expense.find(params[:id])
     if @expense.update(expense_param)
       redirect_to expense_path(@expense)

@@ -1,6 +1,7 @@
 #piechart {
 	padding-bottom: 1em;
 	border-bottom: 1px solid $gray;
+	margin: 0 auto;
 }
 
 .expense-line {
@@ -15,28 +16,34 @@
 .category-line {
 	display: block;
 	border-bottom: 1px solid $gray;
+	padding: 0;
 	span {
-		text-align: right;
+		text-align: left;
 		font-size: 1.5em;
-		padding-right: 1em;
 	}
 	#auto-category {
 		color: $blue;
+		text-align: right;
 	}
 	#food-category {
 		color: $turquoise;
+		text-align: right;
 	}
 	#entertainment-category {
 		color: $dark-gray;
+		text-align: right;
 	}
 	#bill-category {
 		color: $green;
+		text-align: right;
 	}
 	#investment-category {
 		color: $primary;
+		text-align: right;
 	}
 	#misc-category {
 		color: $yellow;
+		text-align: right;
 	}
 }
 
