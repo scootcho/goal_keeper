@@ -80,8 +80,23 @@ class GoalsController < ApplicationController
   	respond_to :js
 	end
 
-	def this_week
-		@today = Time.now
+	def home
+		@goal = Goal.last
+		@today = Date.today
+		@wkbeg = @today.at_beginning_of_week - 1
+		@wkend = @today.at_end_of_week - 1
+	end
+
+	def next_week
+		@wkbeg = Date.parse(params[:wkbeg]) + 7.days
+		@wkend = Date.parse(params[:wkend]) + 7.days
+  	respond_to :js
+	end
+
+	def prev_week
+		@wkbeg = Date.parse(params[:wkbeg]) - 7.days
+		@wkend = Date.parse(params[:wkend]) - 7.days
+  	respond_to :js
 	end
 
 	private

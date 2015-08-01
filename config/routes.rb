@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+  root to: 'goals#home'
+  get 'next_week', to: 'goals#next_week', as: 'next_week'
+  get 'prev_week', to: 'goals#prev_week', as: 'prev_week'
 
   get 'calendar', to: 'goals#current_month', as: 'calendar'
   get 'next_month', to: 'goals#next_month', as: 'next_month'
