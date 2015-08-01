@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
-  resources :goals, :expenses
+
+  get 'calendar', to: 'goals#current_month', as: 'calendar'
+  get 'next_month', to: 'goals#next_month', as: 'next_month'
+  get 'prev_month', to: 'goals#prev_month', as: 'prev_month'
+
+  resources :goals
+
+  resources :expenses
+
   get 'statistics', to: 'expenses#stats'
   get 'auto_transportation', to: 'expenses#auto_category'
 	get 'food_and_dining', to: 'expenses#food_category'

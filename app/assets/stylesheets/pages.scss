@@ -129,3 +129,20 @@
 	margin-bottom: 0;
 }
 
+
+/* calendar */
+
+
+#calendar {
+	width: 90%;
+	margin: 0 auto;
+	th {
+		text-align: center;
+		padding: 2em 0;
+		background: $primary;
+	}
+	td {
+		text-align: center;
+		padding: 1em;
+	}
+}

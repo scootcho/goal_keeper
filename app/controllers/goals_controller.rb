@@ -44,6 +44,46 @@ class GoalsController < ApplicationController
 		end
 	end
 
+	def current_month
+		time_now = Time.now
+		@year = time_now.year
+		@month = time_now.month
+		@beginning_of_month = Date.civil(@year, @month, 1)
+  	@end_of_month = Date.civil(@year, @month, -1)
+	end
+
+	def prev_month
+		@month = params[:month].to_i
+		@year = params[:year].to_i
+		if @month == 1
+			@year -=1
+			@month = 12
+		else
+			@month -= 1
+		end
+		@beginning_of_month = Date.civil(@year, @month, 1)
+  	@end_of_month = Date.civil(@year, @month, -1)
+  	respond_to :js
+	end
+
+	def next_month
+		@month = params[:month].to_i
+		@year = params[:year].to_i
+		if @month == 12
+			@year += 1
+			@month = 1
+		else
+			@month += 1
+		end
+		@beginning_of_month = Date.civil(@year, @month, 1)
+  	@end_of_month = Date.civil(@year, @month, -1)
+  	respond_to :js
+	end
+
+	def this_week
+		@today = Time.now
+	end
+
 	private
 		def goal_param
 			params.require(:goal).permit(:title, :amount, :due_date, :filepicker_url)

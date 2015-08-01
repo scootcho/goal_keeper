@@ -1,0 +1,34 @@
+<div id="calendar-inner">
+  <div id="page-title">
+    <%= "#{Date::MONTHNAMES[@month]} - #{@year}" %>
+  </div>
+
+  <%= link_to "prev", prev_month_path(month: @month, year: @year), remote: true %>
+
+  <%= link_to "next", next_month_path(month: @month, year: @year), remote: true %>
+
+  <table id='calendar'>
+   <tr>
+     <th>Sun</th>
+     <th>Mon</th>
+     <th>Tue</th>
+     <th>Wed</th>
+     <th>Thu</th>
+     <th>Fri</th>
+     <th>Sat</th>
+    </tr>
+    <tr>
+
+    <% (@beginning_of_month..@end_of_month).each do |d| %>
+      <% if d == @beginning_of_month %>
+        <% d.wday.times do %>
+          <td class='offset'></td>
+        <% end %>
+      <% end %>
+
+      <% if d.saturday? %> </tr><tr> <% end %>
+      <td> <%= d.day %> </td>
+    <% end %>
+    </tr>
+  </table>
+</div>
