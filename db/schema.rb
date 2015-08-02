@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729023020) do
+ActiveRecord::Schema.define(version: 20150802043950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "expenses", force: :cascade do |t|
-    t.date    "transaction_date", null: false
-    t.text    "description",      null: false
-    t.text    "category",         null: false
-    t.decimal "amount",           null: false
+    t.date    "expense_date", null: false
+    t.text    "description",  null: false
+    t.text    "category",     null: false
+    t.decimal "amount",       null: false
   end
 
   add_index "expenses", ["category"], name: "index_expenses_on_category", using: :btree
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20150729023020) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "filepicker_url"
+  end
+
+  create_table "incomes", force: :cascade do |t|
+    t.date    "income_date",        null: false
+    t.text    "description",        null: false
+    t.string  "increment_interval", null: false
+    t.decimal "amount",             null: false
   end
 
 end

@@ -2,7 +2,7 @@
   <%= link_to expense_path(expense) do %>
     <div class="expense-line col-xs-12 col-sm-12">
       <div class="col-xs-4 col-sm-4">
-        <%= expense.transaction_date.strftime("%m/%d/%Y") %>
+        <%= expense.expense_date.strftime("%m/%d/%Y") %>
       </div>
       <div class="col-xs-4 col-sm-4">
         <%= expense.description %>

@@ -4,7 +4,7 @@
 
 <%= simple_form_for @expense do |f| %>
   <%= f.input :description, placeholder: "Tocobell", required: false , autofocus: true %>
-  <%= f.input :transaction_date, required: false %>
+  <%= f.input :expense_date, required: false %>
   <%= f.input :amount, placeholder: "$7.23", required: false %>
   <%= f.input :category, :collection => 
                         [ 'Auto & Transportation',
