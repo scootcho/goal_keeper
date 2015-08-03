@@ -1,10 +1,10 @@
 <div class="weekly-goal">
   <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe, prev_week_path(wkbeg: @wkbeg, wkend: @wkend), remote: true %>
-  <div id="this-week">This week</div>
+  <div id="this-week"><%= "#{@wkbeg} ~ #{@wkend}" %></div>
   <%= link_to "<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, next_week_path(wkbeg: @wkbeg, wkend: @wkend), remote: true %>
   <div class="row center-block">
     <% (@wkbeg..@wkend).each do |d| %>
-      <div class="circle"><span><%= d.strftime("%a")%></span></div>
+      <div class="circle"><span><%= d.strftime("%d")%></span></div>
     <% end %>
   </div>
 </div>
