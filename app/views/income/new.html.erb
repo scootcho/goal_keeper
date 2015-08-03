@@ -1,0 +1,13 @@
+<div id="page-title">
+  New Income Item
+</div>
+
+<%= simple_form_for @income, url: '/income' do |f| %>
+  <%= f.input :description %>
+  <%= f.input :amount %>
+  <%= f.input :increment_interval, collection: [ 'one-time', 'weekly', 'bi-weekly' 'monthly' ], selected: "one-time" %>
+  <%= f.input :income_date %>
+  <%= f.button :submit %>
+<% end %>
+
+<div class="clear-nav"></div>
