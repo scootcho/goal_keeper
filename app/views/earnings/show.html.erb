@@ -1,0 +1,22 @@
+<div id="page-title">
+  earning Detail
+</div>
+
+Description:
+<div class="expense-title">
+  <%= @earning.description %>
+</div>
+Amount:
+<div class="expense-amount">
+  <%= @earning.amount %>
+</div>
+Pay Period:
+<div class="expense-category">
+  <%= @earning.interval %>
+</div>
+<div class="expense-category">
+  <%= @earning.payment_count %> of  <%= @earning.number_of_payments %> payments
+</div>
+<%= link_to "edit earning", edit_earning_path(@earning), class: "flat-btn" %>
+
+<div class="clear-nav"></div>

@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802043950) do
+ActiveRecord::Schema.define(version: 20150805223933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "earnings", force: :cascade do |t|
+    t.date    "earning_date",       null: false
+    t.text    "description",        null: false
+    t.string  "interval",           null: false
+    t.string  "payment_count",      null: false
+    t.string  "number_of_payments", null: false
+    t.decimal "amount",             null: false
+  end
 
   create_table "expenses", force: :cascade do |t|
     t.date    "expense_date", null: false
@@ -32,13 +41,6 @@ ActiveRecord::Schema.define(version: 20150802043950) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "filepicker_url"
-  end
-
-  create_table "incomes", force: :cascade do |t|
-    t.date    "income_date",        null: false
-    t.text    "description",        null: false
-    t.string  "increment_interval", null: false
-    t.decimal "amount",             null: false
   end
 
 end

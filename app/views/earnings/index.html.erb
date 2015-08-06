@@ -1,0 +1,16 @@
+<!-- TODO: stylize earnings/index setion -->
+<div id="page-title">
+  earnings
+</div>
+
+<% @earnings.each do |i| %>
+  <div>
+  <%= i.earning_date %>
+  <%= i.description %>
+  <%= i.interval %>
+  <%= i.number_of_payments %>
+  <%= i.amount %>
+  </div>
+<% end %>
+
+<div class="clear-nav"></div>

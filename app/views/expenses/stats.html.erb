@@ -7,10 +7,10 @@
 </div>
 
 <!-- TODO: Refactor this -->
-<%= link_to income_list_path, class: "category-line col-xs-12 col-sm-12" do %>
+<%= link_to earnings_path, class: "category-line col-xs-12 col-sm-12" do %>
   <span class="col-xs-8 col-sm-8">Income</span>
   <span class="col-xs-4 col-sm-4" id="auto-category">
-    <%= number_to_currency(Income.sum(:amount), precision: 2) %>
+    <%= number_to_currency(Earning.sum(:amount), precision: 2) %>
   </span>
 <% end %>
 

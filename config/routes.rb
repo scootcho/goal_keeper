@@ -11,8 +11,7 @@ Rails.application.routes.draw do
 
   resources :expenses
 
-  resources :income
-  get 'income_list', to: 'income#index'
+  resources :earnings
 
   get 'statistics', to: 'expenses#stats'
   get 'auto_transportation', to: 'expenses#auto_category'

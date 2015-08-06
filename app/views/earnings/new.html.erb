@@ -1,0 +1,14 @@
+<div id="page-title">
+  New Earnings
+</div>
+
+<%= simple_form_for @earning do |f| %>
+  <%= f.input :description %>
+  <%= f.input :amount %>
+  <%= f.input :interval, collection: [ 'one-time', 'weekly', 'bi-weekly', 'monthly' ], selected: "one-time" %>
+  <%= f.input :number_of_payments, collection: 1..52, default: 1 %>
+  <%= f.input :earning_date, multiple: true %>
+  <%= f.button :submit %>
+<% end %>
+
+<div class="clear-nav"></div>
