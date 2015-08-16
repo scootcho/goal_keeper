@@ -13,7 +13,7 @@
     Today's remaining budget
   </div>
   <div class="amount-left">
-    <span>$102</span>/144
+    <span>$ <%= Expense.expense_today.round(2) %></span> / <%= Goal.daily_spending_limit.round(2) %>
   </div>
   <hr/>
   <div class="weekly-outer">
@@ -21,29 +21,33 @@
   </div>
 
 <!-- current-goal section -->
-  <%= link_to goal_path(@goal), class: "curent-goal" do %>
-    <div class="current-goal" id="goal-<%= @goal.id %>">
-      <div class="frame">
-        <div class="shader">
-          <div id="current-title">
-            <%= @goal.title %>
+  <% if @goal == nil %>
+    <%= link_to "create new goal", new_goal_path, class: "flat-btn" %>
+  <% else %>
+    <%= link_to goal_path(@goal), class: "curent-goal" do %>
+      <div class="current-goal" id="goal-<%= @goal.id %>">
+        <div class="frame">
+          <div class="shader">
+            <div id="current-title">
+              <%= @goal.title %>
+            </div>
           </div>
+          <div class="shader" id="goal-target">
+            <div id="due">Due:
+              <span><%= @goal.due_date.strftime("%a, %b %m, %Y") %></span>
+            </div>
+            <div id="budget">Budget:
+              <span><%= number_to_currency(@goal.amount, precision: 0) %></span>
+            </div>
+          </div>
+          <% if @goal.filepicker_url.blank? %>
+            <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
+          <% else %>
+              <%= filepicker_image_tag @goal.filepicker_url %>
+          <% end %>
         </div>
-        <div class="shader" id="goal-target">
-          <div id="due">Due:
-            <span><%= @goal.due_date.strftime("%a, %b %m, %Y") %></span>
-          </div>
-          <div id="budget">Budget:
-            <span><%= number_to_currency(@goal.amount, precision: 0) %></span>
-          </div>
-        </div>
-        <% if @goal.filepicker_url.blank? %>
-          <%= image_tag("placeholder.png", width: "100%", alt: "Photo Placeholder") %>
-        <% else %>
-            <%= filepicker_image_tag @goal.filepicker_url %>
-        <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  <% end %> 
   <div class="clear-nav">
 </div>
