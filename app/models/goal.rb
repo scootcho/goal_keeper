@@ -96,10 +96,6 @@ class Goal < ActiveRecord::Base
 		Goal.projected_earnings_within_current_goal.sum(:amount).to_f
 	end
 
-	def self.number_of_earnings_within_current_goal
-		Goal.projected_earnings_within_current_goal.count 
-	end
-	
 	def self.weighted_earning_per_period
 		denominator = Goal.sum_of_earnings_within_current_goal
 		arr = []

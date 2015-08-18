@@ -34,7 +34,7 @@
           </div>
           <div class="shader" id="goal-target">
             <div id="due">Due:
-              <span><%= @goal.due_date.strftime("%a, %b %m, %Y") %></span>
+              <span><%= @goal.due_date.strftime("%a, %d %b, %Y") %></span>
             </div>
             <div id="budget">Budget:
               <span><%= number_to_currency(@goal.amount, precision: 0) %></span>
