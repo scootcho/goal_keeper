@@ -5,7 +5,46 @@ class Goal < ActiveRecord::Base
 	#scopes
 	scope :due_soonest, -> { order("due_date ASC") }
 
-	scope :current_goal, -> { order("due_date ASC").first }
+	#current_goal is to identify what the current goal is.
+	#There will be an option in the interface for user to select next next targeted goal.
+  def self.current_goal
+    goals = Goal.calculate_goals_begin_end_dates
+    today = Date.today
+    array_position = []
+    goals.each_with_index do |day, index|
+      if today < day[:begin_date]
+        array_position << index
+        break
+      end
+    end
+    current_position = array_position[0] - 1
+    goal = Goal.find(goals[current_position][:id])
+
+    while Goal.is_success?(goal)
+      goal = Goal.find(goals[current_position + 1][:id])
+      current_position += 1
+    end
+    goal
+  end
+
+	def self.calculate_goals_begin_end_dates
+		ordered = Goal.order("due_date ASC")
+		num_goals = ordered.count
+		begin_dates	= []
+		counter = 1
+		#first goal will use create date as begin date
+		if ordered[0].created_at < Date.today
+			begin_dates << { id: ordered[0].id, begin_date: ordered[0].created_at.to_date, due_date: ordered[0].due_date, amount: ordered[0].amount }
+		else
+			begin_dates << { id: ordered[0].id, begin_date: ordered[0].due_date, due_date: ordered[0].due_date, amount: ordered[0].amount }
+		end
+
+		while counter < num_goals
+			begin_dates << { id: ordered[counter].id, begin_date: ordered[counter - 1].due_date + 1.day, due_date: ordered[counter].due_date, amount: ordered[counter].amount }
+			counter += 1
+		end
+		begin_dates
+	end
 
 	def self.days_until_current_goal
 		current = Goal.current_goal
@@ -13,24 +52,34 @@ class Goal < ActiveRecord::Base
 		time_left.round
 	end
 
-	def self.net_cash_to_date
+	#total earnings - total expenses = disposable cash available
+	def self.net_cash_to_date(goal)
+		goal_dates = Goal.calculate_goals_begin_end_dates
+		select = goal.id
+		goal_date = goal_dates.select { |a| a[:id] == goal.id }
 		earnings_ordered = Earning.order("earning_date ASC")
 		expenses_ordered = Expense.order("earning_date ASC")
-		today = Date.today
-		earnings_to_date = earnings_ordered.where("earning_date < ? ", today).sum(:amount)
-		expenses_to_date = expenses_ordered.where("expense_date < ? ", today).sum(:amount)
-		net_cash = earnings_to_date - expenses_to_date
+		begin_date = goal_date[0][:begin_date]
+		end_date = goal_date[0][:due_date]
+		earnings_to_date = earnings_ordered.where("earning_date BETWEEN ? AND ?", begin_date, end_date).sum(:amount)
+		expenses_to_date = expenses_ordered.where("expense_date BETWEEN ? AND ?", begin_date, end_date).sum(:amount)
+		net_cash = earnings_to_date.to_f - expenses_to_date.to_f
 	end
 
-	def self.remaining_goal
-		remaining_goal = Goal.current_goal.amount - Goal.net_cash_to_date
-		if remaining_goal > 0
-			remaining_goal.to_f
+	def self.is_success?(goal)
+		#the net_cash_to_date needs a beginning
+		if goal.amount < Goal.net_cash_to_date(goal)
+			true
 		else
-			# exeeded goal amount
-			#TODO: implement next goal once current_goal is exceeded
-			puts "you've exceeded your goal by $#{remaining_goal.abs.to_f}!!"
+			false
 		end
+	end
+
+	#how much remaining is needed to get to the current goal.
+	def self.remaining_goal
+		goal = Goal.current_goal
+		remaining_goal = goal.amount - Goal.net_cash_to_date(goal)
+		remaining_goal
 	end
 
 	def self.projected_earnings_within_current_goal
