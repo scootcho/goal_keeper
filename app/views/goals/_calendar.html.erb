@@ -17,8 +17,8 @@
      <th>Fri</th>
      <th>Sat</th>
     </tr>
-    <tr>
 
+    <tr>
     <% (@beginning_of_month..@end_of_month).each do |d| %>
       <% if d == @beginning_of_month %>
         <% d.wday.times do %>
@@ -26,8 +26,8 @@
         <% end %>
       <% end %>
 
-      <% if d.saturday? %> </tr><tr> <% end %>
-      <td> <%= d.day %> </td>
+      <% if d.wday == 0 %> </tr><tr> <% end %>
+      <td><div class="td-circle-<%= d.day.even? ? "pass" : "fail" %>"><%= d.day %></div></td>
     <% end %>
     </tr>
   </table>

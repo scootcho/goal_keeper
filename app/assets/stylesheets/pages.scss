@@ -146,3 +146,15 @@
 		padding: 1em;
 	}
 }
+
+.td-circle-pass {
+	border-radius: 1em;
+	background-color: $primary;
+	color: white;
+}
+.td-circle-fail {
+	border-radius: 1em;
+	background-color: $red;
+	color: white;
+}
+
