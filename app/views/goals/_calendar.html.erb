@@ -27,7 +27,17 @@
       <% end %>
 
       <% if d.wday == 0 %> </tr><tr> <% end %>
-      <td><div class="td-circle-<%= d.day.even? ? "pass" : "fail" %>"><%= d.day %></div></td>
+      <td>
+      <div class=
+        <% case Goal.day_target_met(d) %>
+        <% when nil %>
+          <%= "td-circle" %>
+        <% when true %>
+          <%= "td-circle-pass" %>
+        <% when false %>
+          <%= "td-circle-fail" %>
+        <% end %>
+      ><%= d.day %></div></td>
     <% end %>
     </tr>
   </table>

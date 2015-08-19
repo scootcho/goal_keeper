@@ -7,12 +7,11 @@ class Goal < ActiveRecord::Base
 
 	#current_goal is to identify what the current goal is.
 	#There will be an option in the interface for user to select next next targeted goal.
-  def self.current_goal
+  def self.current_goal(date)
     goals = Goal.calculate_goals_begin_end_dates
-    today = Date.today
     array_position = []
     goals.each_with_index do |day, index|
-      if today < day[:begin_date]
+      if date < day[:begin_date]
         array_position << index
         break
       end
@@ -46,12 +45,6 @@ class Goal < ActiveRecord::Base
 		begin_dates
 	end
 
-	def self.days_until_current_goal
-		current = Goal.current_goal
-		time_left = current.due_date - Date.today
-		time_left.round
-	end
-
 	#total earnings - total expenses = disposable cash available
 	def self.net_cash_to_date(goal)
 		goal_dates = Goal.calculate_goals_begin_end_dates
@@ -60,9 +53,9 @@ class Goal < ActiveRecord::Base
 		earnings_ordered = Earning.order("earning_date ASC")
 		expenses_ordered = Expense.order("earning_date ASC")
 		begin_date = goal_date[0][:begin_date]
-		end_date = goal_date[0][:due_date]
-		earnings_to_date = earnings_ordered.where("earning_date BETWEEN ? AND ?", begin_date, end_date).sum(:amount)
-		expenses_to_date = expenses_ordered.where("expense_date BETWEEN ? AND ?", begin_date, end_date).sum(:amount)
+		due_date = goal_date[0][:due_date]
+		earnings_to_date = earnings_ordered.where("earning_date BETWEEN ? AND ?", begin_date, due_date).sum(:amount)
+		expenses_to_date = expenses_ordered.where("expense_date BETWEEN ? AND ?", begin_date, due_date).sum(:amount)
 		net_cash = earnings_to_date.to_f - expenses_to_date.to_f
 	end
 
@@ -75,54 +68,60 @@ class Goal < ActiveRecord::Base
 		end
 	end
 
-	#how much remaining is needed to get to the current goal.
-	def self.remaining_goal
-		goal = Goal.current_goal
+	#dollar amount remaining to get to the current goal.
+	def self.remaining_goal(date)
+		goal = Goal.current_goal(date)
 		remaining_goal = goal.amount - Goal.net_cash_to_date(goal)
 		remaining_goal
 	end
 
-	def self.projected_earnings_within_current_goal
+	def self.projected_earnings_within_current_goal(date)
+		current_goal = Goal.current_goal(date)
+		goal_dates = Goal.calculate_goals_begin_end_dates
+		goal_date = goal_dates.select { |a| a[:id] == current_goal.id }
+		begin_date = goal_date[0][:begin_date]
+		due_date = goal_date[0][:due_date]
+
 		arr = Earning.order("earning_date ASC")
-		arr.where("earning_date < ? ", Goal.current_goal.due_date)
+		arr.where("earning_date BETWEEN ? AND ?", begin_date, due_date)
 	end
 
-	def self.one_earning_after_current_goal
+	def self.one_earning_after_current_goal(date)
 		arr = Earning.order("earning_date ASC")
-		arr.where("earning_date > ? ", Goal.current_goal.due_date).limit(1)
+		arr.where("earning_date > ? ", Goal.current_goal(date).due_date).limit(1)
 	end
 
-	def self.sum_of_earnings_within_current_goal
-		Goal.projected_earnings_within_current_goal.sum(:amount).to_f
+	def self.sum_of_earnings_within_current_goal(date)
+		Goal.projected_earnings_within_current_goal(date).sum(:amount).to_f
 	end
 
-	def self.weighted_earning_per_period
-		denominator = Goal.sum_of_earnings_within_current_goal
+	def self.weighted_earning_per_period(date)
+		denominator = Goal.sum_of_earnings_within_current_goal(date)
 		arr = []
-		Goal.projected_earnings_within_current_goal.each do |earning|
+		Goal.projected_earnings_within_current_goal(date).each do |earning|
 			weighted = earning.amount / denominator
 			arr << {earning_id: earning.id, weighted: weighted.to_f}
 		end
 		arr
 	end
 
-	def self.weighted_goal_per_period
-		remaining = Goal.remaining_goal
+	def self.weighted_goal_per_period(date)
+		remaining = Goal.remaining_goal(date)
 		if remaining == nil
 			puts "you have exceeded the current goal!"
 			#TODO: implement next goal here
 		else
 			#weighted_amount is goal amount for a pay period
-			Goal.weighted_earning_per_period.map do |arr|
+			Goal.weighted_earning_per_period(date).map do |arr|
 				{ earning_id: arr[:earning_id], weighted: arr[:weighted], weighted_amount: arr[:weighted] * remaining }
 			end
 		end
 	end
 
-	def self.diff_between_earning_dates
-		arr = Goal.projected_earnings_within_current_goal
+	def self.diff_between_earning_dates(date)
+		arr = Goal.projected_earnings_within_current_goal(date)
 		num_payments = arr.count
-		arr << Goal.one_earning_after_current_goal[0]
+		arr << Goal.one_earning_after_current_goal(date)[0]
 		counter = 0
 		result = []
 		while counter < num_payments do
@@ -133,12 +132,11 @@ class Goal < ActiveRecord::Base
 		result
 	end
 
-	def self.today_falls_within_earning_period
-		ordered = Goal.projected_earnings_within_current_goal
-		today = Date.today
+	def self.date_falls_within_earning_period(date)
+		ordered = Goal.projected_earnings_within_current_goal(date)
 		array_position = []
 		ordered.each_with_index do |day, index|
-			if today < day[:earning_date]
+			if date < day[:earning_date]
 				array_position << index
 				break
 			end
@@ -147,16 +145,16 @@ class Goal < ActiveRecord::Base
 		ordered[current_position]
 	end
 
-	def self.daily_spending_limit
-		earning_period =	Goal.today_falls_within_earning_period
+	def self.daily_spending_limit(date)
+		earning_period =	Goal.date_falls_within_earning_period(date)
 		earning_id = earning_period[:id]
 		earning_date = earning_period[:earning_date]
 
-		amount = Goal.weighted_goal_per_period.select do |hash|
+		amount = Goal.weighted_goal_per_period(date).select do |hash|
 		    hash[:earning_id] == earning_id
 		end
 
-		diff_date =	Goal.diff_between_earning_dates.select do |hash|
+		diff_date =	Goal.diff_between_earning_dates(date).select do |hash|
 		    hash[:earning_id] == earning_id
 		end
 
@@ -164,5 +162,17 @@ class Goal < ActiveRecord::Base
 		days_per_period = diff_date[0][:date_diff].abs
 
 		amount_per_period / days_per_period
+	end
+
+	def self.day_target_met(date)
+		expense = Expense.expense_for_date(date)
+		limit = Goal.daily_spending_limit(date)
+		if  expense == 0
+			return nil
+		elsif expense < limit
+			true
+		else
+			false
+		end
 	end
 end

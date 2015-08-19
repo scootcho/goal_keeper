@@ -11,5 +11,9 @@ class Expense < ActiveRecord::Base
 	scope :investments_expenses, -> { where(category: "Investments") }
 	scope :miscs_expenses, -> { where(category: "MISC") }
 
-  scope :expense_today, -> { where('expense_date BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).sum(:amount) }
+  def self.expense_for_date(date)
+  	beginning_of_day = date.beginning_of_day
+  	end_of_day = date.end_of_day
+  	Expense.where('expense_date BETWEEN ? AND ?', beginning_of_day, end_of_day).sum(:amount)
+  end
 end

@@ -13,7 +13,7 @@
     Today's remaining budget
   </div>
   <div class="amount-left">
-    <span>$ <%= Expense.expense_today.round(2) %></span> / <%= Goal.daily_spending_limit.round(2) %>
+    <span>$ <%= Expense.expense_for_date(Date.today).round(2) %></span> / <%= Goal.daily_spending_limit(Date.today).round(2) %>
   </div>
   <hr/>
   <div class="weekly-outer">

@@ -81,7 +81,7 @@ class GoalsController < ApplicationController
 	end
 
 	def home
-		@goal = Goal.current_goal
+		@goal = Goal.current_goal(Date.today)
 		@today = Date.today
 		@wkbeg = @today.at_beginning_of_week - 1
 		@wkend = @today.at_end_of_week - 1
