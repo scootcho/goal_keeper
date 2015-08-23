@@ -18,10 +18,9 @@ class Goal < ActiveRecord::Base
     goals.each_with_index do |day, index|
       if date < day[:begin_date]
         array_position << index
-        break
       end
     end
-    current_position = array_position[0] - 1
+    current_position = array_position[0].to_i - 1
     goal = Goal.find(goals[current_position][:id])
 
     while Goal.is_success?(goal)
@@ -142,10 +141,9 @@ class Goal < ActiveRecord::Base
 		ordered.each_with_index do |day, index|
 			if date < day[:earning_date]
 				array_position << index
-				break
 			end
 		end
-		current_position = array_position[0] - 1
+		current_position = array_position[0].to_i - 1
 		ordered[current_position]
 	end
 
