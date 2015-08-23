@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
 	def index
-		@goals = Goal.due_soonest
+		@goals = Goal.order_by_due_earliest
 	end
 
 	def show

@@ -1,12 +1,17 @@
 class Goal < ActiveRecord::Base
+	#flush cached queries when data is created/updated/destoryed
+  after_create :flush_cache
+  after_update :flush_cache
+  after_destroy :flush_cache
+
 	#validations
 	validates :title, :amount, :due_date, presence: true
 
-	#scopes
-	scope :due_soonest, -> { order("due_date ASC") }
+	def self.order_by_due_earliest
+		Rails.cache.fetch("order_by_due_earliest_cached") { order("due_date ASC") }
+	end
 
-	#current_goal is to identify what the current goal is.
-	#There will be an option in the interface for user to select next next targeted goal.
+	#identify what the current goal is goals satisfied are skipped
   def self.current_goal(date)
     goals = Goal.calculate_goals_begin_end_dates
     array_position = []
@@ -26,8 +31,8 @@ class Goal < ActiveRecord::Base
     goal
   end
 
-	def self.calculate_goals_begin_end_dates
-		ordered = Goal.order("due_date ASC")
+	def self.calculate_goals_begin_end_dates #since goals doesn't have an begin date, we're calculating here dynamically
+		ordered = Goal.order_by_due_earliest
 		num_goals = ordered.count
 		begin_dates	= []
 		counter = 1
@@ -46,12 +51,12 @@ class Goal < ActiveRecord::Base
 	end
 
 	#total earnings - total expenses = disposable cash available
-	def self.net_cash_to_date(goal)
+	def self.net_cash_within_goal(goal)
 		goal_dates = Goal.calculate_goals_begin_end_dates
 		select = goal.id
 		goal_date = goal_dates.select { |a| a[:id] == goal.id }
-		earnings_ordered = Earning.order("earning_date ASC")
-		expenses_ordered = Expense.order("earning_date ASC")
+		earnings_ordered = Earning.order_by_earliest
+		expenses_ordered = Expense.order_by_earliest
 		begin_date = goal_date[0][:begin_date]
 		due_date = goal_date[0][:due_date]
 		earnings_to_date = earnings_ordered.where("earning_date BETWEEN ? AND ?", begin_date, due_date).sum(:amount)
@@ -60,8 +65,7 @@ class Goal < ActiveRecord::Base
 	end
 
 	def self.is_success?(goal)
-		#the net_cash_to_date needs a beginning
-		if goal.amount < Goal.net_cash_to_date(goal)
+		if goal.amount < Goal.net_cash_within_goal(goal)
 			true
 		else
 			false
@@ -71,7 +75,7 @@ class Goal < ActiveRecord::Base
 	#dollar amount remaining to get to the current goal.
 	def self.remaining_goal(date)
 		goal = Goal.current_goal(date)
-		remaining_goal = goal.amount - Goal.net_cash_to_date(goal)
+		remaining_goal = goal.amount - Goal.net_cash_within_goal(goal)
 		remaining_goal
 	end
 
@@ -175,4 +179,10 @@ class Goal < ActiveRecord::Base
 			false
 		end
 	end
+
+	private
+
+		def flush_cache
+			Rails.cache.delete("order_by_due_earliest_cached")
+		end
 end
