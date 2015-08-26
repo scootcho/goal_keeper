@@ -1,9 +1,9 @@
 class CreateGoals < ActiveRecord::Migration
   def change
     create_table :goals do |t|
-    	t.string :title, null: false
-    	t.decimal :amount, null: false
-    	t.date :due_date, null:false
+      t.string :title, null: false
+      t.decimal :amount, null: false
+      t.date :due_date, null:false
 
       t.timestamps null: false
     end

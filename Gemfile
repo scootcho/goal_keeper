@@ -46,23 +46,23 @@ gem "chartkick"
 # gem 'capistrano-rails', group: :development
 gem 'rails_12factor', group: :production
 
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  # Rspec for testing
-  gem 'rspec-rails', '~> 3.0'
-
-  # Acceptance test framework for web applications
-  gem 'capybara'
-
-  # fixtures replacement with a straightforward definition syntax
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'spring'
 end
 
+group :test do
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'faker'
+  gem 'launchy'
+  gem 'database_cleaner'
+end
+
+group :development do
+  gem 'pry'
+  gem 'better_errors', '~> 1.1.0' # gives much better error messages for debug
+  gem 'binding_of_caller', '~> 0.7.2' # helps out better_errors by giving you an interactive way to query variables and methods on the better_errors error screen
+end

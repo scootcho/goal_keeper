@@ -6,6 +6,13 @@ class Expense < ActiveRecord::Base
 
 	#validations
 	validates :expense_date, :description, :category, :amount, presence: true
+  validates :category, inclusion: { in: [ 'Auto & Transportation',
+                                          'Food & Dining',
+                                          'Entertaiment',
+                                          'Bills & Utilities',
+                                          'Investments',
+                                          'MISC'],
+    message: "%{value} is " }
 
 	scope :latest_expenses, -> { order("expense_date DESC") }
 
